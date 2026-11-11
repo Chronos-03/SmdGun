@@ -1,0 +1,42 @@
+Item #,Item Description,Quantity,Unit Price (USD),Total Price (USD)
+1,Custom 3D-Printed Enclosure + Cradle,1,$20.12,$20.12
+2,Custom 2-Layer PCB Manufacturing,1 lot,$11.83,$11.83
+3,ESP32-S3-DevKitC-1-N8R8,1,$12.43,$12.43
+4,"2.8"" SPI TFT LCD (ILI9341, Non-Touch)",1,$8.05,$8.05
+5,MAX6675 Thermocouple Module,1,$4.14,$4.14
+6,LM2596 DC-DC Buck Step-Down Module,1,$0.71,$0.71
+7,Quick 858D Replacement Handle,1,$6.63,$6.63
+8,24V 3A (72W) Metal Enclosed SMPS,1,$7.10,$7.10
+9,KW11-3Z Roller Lever Micro Switch,1,$0.41,$0.41
+10,IEC320 C14 AC Mains Socket + Rocker Switch,1,$0.71,$0.71
+11,Double-Sided Heavy Duty Foam Mounting Tape,1 roll,$1.20,$1.20
+12,"Polyimide Heat Insulation Tape (Kapton, 10mm×33m)",1 roll,$1.49,$1.49
+13,Finned Aluminum Heatsink Kit (TO-220),1 kit,$1.10,$1.10
+14,Desoldering Vacuum Pump (Solder Sucker),1,$1.07,$1.07
+15,Heat Shrink Tubing Assortment (100 pcs),1 pack,$0.95,$0.95
+16,Thermal Heatsink Compound Paste (Syringe),1 syringe,$0.41,$0.41
+17,"858D Hot Air Gun Nozzles (3-Pack: 6, 8, 12mm)",1 set,$4.13,$4.13
+18,Mechanic UV-559 Solder Flux Paste Syringe (10cc),1,$2.36,$2.36
+19,"63/37 Rosin Core Solder Wire (0.8mm, 50g)",1 spool,$2.96,$2.96
+20,Anti-Static ESD Precision Tweezers (6 pcs),1 set,$2.91,$2.91
+21,Silicone Flexible Hookup Cable (16 & 24 AWG),2 rolls,$1.78,$1.78
+22,BTA16-600B TRIAC (Insulated Tab),1,$0.41,$0.41
+23,MOC3041 Zero-Cross Optocoupler,1,$0.30,$0.30
+24,6-Pin DIP IC Socket,1,$0.06,$0.06
+25,IRLZ44N Logic-Level N-MOSFET,1,$0.77,$0.77
+26,1N4007 Diode,1,$0.02,$0.02
+27,39Ω 2W Metal Oxide Resistor,1,$0.06,$0.06
+28,360Ω 1W Axial Resistor,1,$0.04,$0.04
+29,"150Ω, 220Ω, 10kΩ Resistors",3,$0.02,$0.07
+30,0.01µF (10nF) 275VAC X2 Film Cap,1,$0.18,$0.18
+31,5A 250V AC 5×20mm Fuse + 2x Clips,1 set,$0.18,$0.18
+32,2A Resettable PTC Polyfuse,1,$0.14,$0.14
+33,EC11 Rotary Encoders + Knobs,2 sets,$0.59,$1.18
+34,GX16 8-Pin Aviation Plug/Socket Set,1 set,$1.42,$1.42
+35,2-Pin 5.08mm Screw Terminals (KF301),7 pcs,$0.07,$0.50
+36,1×40 Male & Female Berg Header Strips,2 strips,$0.24,$0.47
+37,M3 × 3mm Brass Heat-Set Inserts,10 pcs,$0.04,$0.36
+38,M3 × 4mm Pan Head Phillips Screws,10 pcs,$0.02,$0.18
+39,M3 Stainless Steel Nuts & Washers Pack,1 pack,$0.24,$0.24
+40,M2 × 8mm / 10mm Screws + M2 Nuts Pack,1 pack,$0.19,$0.19
+,TOTAL ESTIMATED BUILD & TOOLING COST,,,~$99.26 USD
