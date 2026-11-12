@@ -42,6 +42,7 @@ pressing the M3 × 3mm brass heat-set inserts flush into the 3D-printed mounting
 The ESP32-S3 firmware runs a non-blocking C++ control loop that continuously polls the MAX6675 sensor over hardware SPI every 250ms, feeds the nozzle temperature into a PID control algorithm to update the zero-crossing heater duty cycle on `GPIO 4` (`HEATER_PWM`), and refreshes the 2.8-inch ILI9341 TFT display while tracking rotary encoder interrupts for instant target temperature and fan speed adjustments. When the user places the hot air gun into the cradle, the weight of the handle depresses the KW11-3Z roller lever and pulls `GPIO 6` (`REED_SW`) to `GND` (`LOW`), which immediately forces the heater output to `0%`, switches the UI to Cooldown Mode, and locks the 24V blower fan (`GPIO 5`) at 80%–100% speed for a full 1-minute cooldown timer (and until the thermocouple reading drops below 50°C) before shutting the fan off completely and entering low-power
 
 ### **Chronos-858D Master Bill of Materials (BOM)**
+
 | # | Component | Supplier | Qty | Total (INR) | Total (USD) | Product Link |
 | :--- | :--- | :--- | :---: | :---: | :---: | :--- |
 | **1** | Custom 3D-Printed Enclosure + Cradle | PrintLegion | 1 | ₹2,500 | $26.88 | [Link](https://printinglegion.hackclub.com) |
@@ -73,4 +74,5 @@ The ESP32-S3 firmware runs a non-blocking C++ control loop that continuously pol
 | **27** | 100nF 400V DIP Polyester Film Cap | Robu | 1 | ₹6.00 | $0.06 | [Link](https://robu.in/product/100nf-400v-dip-polyester-film-capacitor-pitch10mm/) |
 | **28** | 100nF 0805 SMD Ceramic Capacitor | Robu | 3 | ₹2.37 | $0.03 | [Link](https://robu.in/product/100nf-0805-surface-mount-multilayer-ceramic-capacitor-pack-of-40/) |
 | **29** | 100µF 35V SMD Tantalum Capacitor | Robu | 1 | ₹57.00 | $0.61 | [Link](https://robu.in/product/100uf-35v-10-d-case-chip-tantalum-capacitorsmd-avx/) |
-| | **FINAL GRAND TOTAL** | | | **₹8,816.82** | **$94.80** | |
+| **30** | DHRUV-PRO 120x120x38mm 24V Cooling Fan | Amazon | 1 | ₹579.00 | $6.23 | [Link](https://www.amazon.in/DHRUV-PRO-120X120X38mm-Cooling-120x120x38-MM-2800-RPM/dp/B0BTMC17SK/) |
+| | **FINAL GRAND TOTAL** | | | **₹9,395.82** | **$101.05** | |
