@@ -36,55 +36,41 @@ On the isolated AC side  protected by a 5A 250V fast-blow glass fuse , HEATER_PW
 ## 5. Enclosure & Case Assembly
 pressing the M3 × 3mm brass heat-set inserts flush into the 3D-printed mounting bosses inside the front bezel and main chassis floor, then pre-tune the LM2596 buck converter  with a multimeter to output exactly 5.0V DC before seating the ESP32-S3 into its female headers. Next, mount the 2.8-inch ILI9341 TFT display and the populated main PCB onto the internal standoffs using M3 × 4mm pan head screws, fasten the two EC11 rotary encoders and the GX16-8 aviation panel socket to the front face, and bolt the TO-220 aluminum heatsink onto the BTA16-600B TRIAC  with a thin layer of thermal paste. Secure the 24V 3A SMPS to the base of the enclosure double-sided heavy-duty foam tape, snap the IEC320 C14 AC mains inlet switch into the rear panel cutout, and fasten the KW11-3Z roller limit switch onto the external handle cradle using M2 screws and nuts. Finally, wire the 16 AWG silicone power cables from the IEC inlet and SMPS to the screw terminal blocks  and the 24 AWG signal wires from the cradle switch , insulating all exposed AC and DC joints with heat shrink tubing and Kapton tape before closing the case and verifying electrical isolation with a continuity test.
 
-
 ---
 
 ## 6. Firmware Architecture & Cooldown Logic
 The ESP32-S3 firmware runs a non-blocking C++ control loop that continuously polls the MAX6675 sensor over hardware SPI every 250ms, feeds the nozzle temperature into a PID control algorithm to update the zero-crossing heater duty cycle on `GPIO 4` (`HEATER_PWM`), and refreshes the 2.8-inch ILI9341 TFT display while tracking rotary encoder interrupts for instant target temperature and fan speed adjustments. When the user places the hot air gun into the cradle, the weight of the handle depresses the KW11-3Z roller lever and pulls `GPIO 6` (`REED_SW`) to `GND` (`LOW`), which immediately forces the heater output to `0%`, switches the UI to Cooldown Mode, and locks the 24V blower fan (`GPIO 5`) at 80%–100% speed for a full 1-minute cooldown timer (and until the thermocouple reading drops below 50°C) before shutting the fan off completely and entering low-power
 
-## 7. Bill of Materials (BOM)
-The complete build, including custom PCB fabrication, 3D-printed enclosure parts, electronic modules, fasteners, and SMD rework consumables, totals approximately **$100 USD**:
-
-| # | Item Description | Schematic Ref / Application | Qty | Unit Price (USD) | Total (USD) |
-| :-: | :--- | :--- | :-: | :-: | :-: |
-| 1 | **Custom 3D-Printed Enclosure + Cradle** | 1 | $20.12 | **$20.12** |
-| 2 | **Custom 2-Layer PCB Manufacturing** | PCB | 1 lot | $11.83 | **$11.83** |
-| 3 | **ESP32-S3-DevKitC-1-N8R8** | 1 | $12.43 | **$12.43** |
-| 4 | **2.8" SPI TFT LCD (ILI9341, Non-Touch)** | 1 | $8.05 | **$8.05** |
-| 5 | **MAX6675 Thermocouple Module** | 1 | $4.14 | **$4.14** |
-| 6 | **LM2596 DC-DC Buck Step-Down Module** | 1 | $0.71 | **$0.71** |
-| 7 | **Quick 858D Replacement Handle** |  1 | $6.63 | **$6.63** |
-| 8 | **24V 3A (72W) Metal Enclosed SMPS** |1 | $7.10 | **$7.10** |
-| 9 | **KW11-3Z Roller Lever Micro Switch** |  1 | $0.41 | **$0.41** |
-| 10 | **IEC320 C14 AC Mains Socket + Rocker Switch** | 1 | $0.71 | **$0.71** |
-| 11 | **Double-Sided Heavy Duty Foam Mounting Tape** |  1 roll | $1.20 | **$1.20** |
-| 12 | **Polyimide Heat Insulation Tape (Kapton, 10mm×33m)** |  1 roll | $1.49 | **$1.49** |
-| 13 | **Finned Aluminum Heatsink Kit (TO-220)** | 1 kit | $1.10 | **$1.10** |
-| 14 | **Desoldering Vacuum Pump (Solder Sucker)** |  1 | $1.07 | **$1.07** |
-| 15 | **Heat Shrink Tubing Assortment (100 pcs)** | 1 pack | $0.95 | **$0.95** |
-| 16 | **Thermal Heatsink Compound Paste (Syringe)** |  1 syringe | $0.41 | **$0.41** |
-| 17 | **858D Hot Air Gun Nozzles (3-Pack: 6, 8, 12mm)** |  1 set | $4.13 | **$4.13** |
-| 18 | **Mechanic UV-559 Solder Flux Paste Syringe (10cc)** |  1 | $2.36 | **$2.36** |
-| 19 | **63/37 Rosin Core Solder Wire (0.8mm, 50g)** | 1 spool | $2.96 | **$2.96** |
-| 20 | **Anti-Static ESD Precision Tweezers (6 pcs)** | 1 set | $2.91 | **$2.91** |
-| 21 | **Silicone Flexible Hookup Cable (16 & 24 AWG)** | 2 rolls | $1.78 | **$1.78** |
-| 22 | **BTA16-600B TRIAC (Insulated Tab)** | 1 | $0.41 | **$0.41** |
-| 23 | **MOC3041 Zero-Cross Optocoupler** |  1 | $0.30 | **$0.30** |
-| 24 | **6-Pin DIP IC Socket** |  1 | $0.06 | **$0.06** |
-| 25 | **IRLZ44N Logic-Level N-MOSFET** |  1 | $0.77 | **$0.77** |
-| 26 | **1N4007 Diode** | 1 | $0.02 | **$0.02** |
-| 27 | **39Ω 2W Metal Oxide Resistor** |  1 | $0.06 | **$0.06** |
-| 28 | **360Ω 1W Axial Resistor** |  1 | $0.04 | **$0.04** |
-| 29 | **150Ω, 220Ω, 10kΩ Resistors** |  3 | $0.02 | **$0.07** |
-| 30 | **0.01µF (10nF) 275VAC X2 Film Cap** | 1 | $0.18 | **$0.18** |
-| 31 | **5A 250V AC 5×20mm Fuse + 2x Clips** | 1 set | $0.18 | **$0.18** |
-| 32 | **2A Resettable PTC Polyfuse** |  1 | $0.14 | **$0.14** |
-| 33 | **EC11 Rotary Encoders + Knobs** | 2 sets | $0.59 | **$1.18** |
-| 34 | **GX16 8-Pin Aviation Plug/Socket Set** |  1 set | $1.42 | **$1.42** |
-| 35 | **2-Pin 5.08mm Screw Terminals (KF301)** |  7 pcs | $0.07 | **$0.50** |
-| 36 | **1×40 Male & Female Berg Header Strips** |  2 strips | $0.24 | **$0.47** |
-| 37 | **M3 × 3mm Brass Heat-Set Inserts** | 10 pcs | $0.04 | **$0.36** |
-| 38 | **M3 × 4mm Pan Head Phillips Screws** |  10 pcs | $0.02 | **$0.18** |
-| 39 | **M3 Stainless Steel Nuts & Washers Pack** |  1 pack | $0.24 | **$0.24** |
-| 40 | **M2 × 8mm / 10mm Screws + M2 Nuts Pack** |  1 pack | $0.19 | **$0.19** |
-| | **TOTAL ESTIMATED BUILD & TOOLING COST** | | | | **~$99.26 USD** |
+### **Chronos-858D Master Bill of Materials (BOM)**
+| # | Component | Supplier | Qty | Total (INR) | Total (USD) | Product Link |
+| :--- | :--- | :--- | :---: | :---: | :---: | :--- |
+| **1** | Custom 3D-Printed Enclosure + Cradle | PrintLegion | 1 | ₹2,500 | $26.88 | [Link](https://printinglegion.hackclub.com) |
+| **2** | Custom 2-Layer PCB Manufacturing | Robu | 1 | ₹900 | $9.68 | [Link](https://robu.in/) |
+| **3** | ESP32-S3-DevKitC-1-N8R8 | Robu | 1 | ₹1,839 | $19.77 | [Link](https://robu.in/product/espressif-esp32-s3-devkitc-1-n8r8-development-board/) |
+| **4** | 2.4" SPI TFT Touch Screen Module | MakerBazar | 1 | ₹679 | $7.30 | [Link](https://makerbazar.in/products/2-4-inch-spi-interface-240-320-tft-display-module?variant=44937178022128) |
+| **5** | MAX6675 Thermocouple Module | MakerBazar | 1 | ₹309 | $3.32 | [Link](https://makerbazar.in/products/max6675-thermocouple-sensor-module) |
+| **6** | LM2596 DC-DC Buck Step-Down Module | MakerBazar | 1 | ₹79 | $0.85 | [Link](https://makerbazar.in/products/lm2596-dc-dc-converter-step-down-module?variant=48251191918832) |
+| **7** | Quick 858D Replacement Handle (8-wire) | TonyVision | 1 | ₹649 | $6.98 | [Link](https://www.tonyvision.in/product/30533442/Quick-858-Handle-For-858-SMD-Rework-Station--8-Wire-) |
+| **8** | GX16-8 Aviation Socket (Panel Mount) | Probots | 1 | ₹160 | $1.72 | [Link](https://probots.co.in/8-pin-gx16-male-to-female-aviation-plug.html) |
+| **9** | 24V 3A Metal Enclosed SMPS | ElecComp | 1 | ₹500 | $5.38 | [Link](https://www.electronicscomp.com/24v-3amp-smps-dc-metal-power-supply-nwp-india) |
+| **10** | KW11-3Z Roller Lever Micro Switch | MakerBazar | 1 | ₹20 | $0.22 | [Link](https://makerbazar.in/products/automation-direct-limit-switch?variant=46931163742448) |
+| **11** | IEC320 C14 AC Mains Socket + Rocker | Probots | 1 | ₹210 | $2.26 | [Link](https://probots.co.in/3-pin-iec320-c14-ac-power-socket-with-fuse-red-rocker-switch-panel-mount-connector.html) |
+| **12** | Finned Aluminum Heatsink Kit | MakerBazar | 3 | ₹87 | $0.94 | [Link](https://makerbazar.in/products/3pcs-aluminum-heatsink-with-thermal-tape-for-raspberry-pi-4-model-b-black?variant=48460430213360) |
+| **13** | KF301 2-Pin 5.08mm Screw Terminal | Robu | 2 | ₹20 | $0.22 | [Link](https://robu.in/product/kf301-2-pin-5-08mm-pitch-plug-in-screw-terminal-block-connector-pack-of-5/) |
+| **14** | 240V AC Power Cord 3-Pin to IEC C-13 | MakerBazar | 1 | ₹159 | $1.71 | [Link](https://makerbazar.in/products/240v-ac-power-cord-3-pin-to-iec-c-13-female-cable?variant=44609024262384) |
+| **15** | 20AWG Flexible Silicone Wire (Green) | Robu | 1 | ₹50 | $0.54 | [Link](https://robu.in/product/high-quality-ultra-flexible-20awg-silicone-wire-1000m-green/) |
+| **16** | BTA16-600B TRIAC (Pack of 5) | Amazon | 1 | ₹169 | $1.82 | [Link](https://www.amazon.in/pics-BTA16-600B-TRIAC-Volts/dp/B0C9VVTZTV/) |
+| **17** | MOC3041M Zero-Cross Optoisolator | Robu | 1 | ₹50 | $0.54 | [Link](https://robu.in/product/moc3041m-ic-zero-cross-optoisolator-triac-driver-ic/) |
+| **18** | IRLZ44N Logic-Level N-Channel MOSFET | Robu | 1 | ₹44 | $0.47 | [Link](https://robu.in/product/irlz44n/) |
+| **19** | 1N4007 1W Rectifier Diode | Robu | 5 | ₹15 | $0.16 | [Link](https://robu.in/product/1n4007-1w-diode-pack-of-30/) |
+| **20** | Hongyan EC11 Rotary Encoders | Robu | 2 | ₹116 | $1.25 | [Link](https://robu.in/product/hongyan-ec11h-7ce20p1zy20-rotary-encoder-with-push-button-switch-vertical-plug-in-5-pin/) |
+| **21** | Loose M3 Screws, Nuts & 1m Heat Shrink | Local | 1 | ₹50 | $0.54 | *Local Hardware Store* |
+| **22** | 330Ω 1/4W 1206 SMD Resistor | Robu | 1 | ₹15 | $0.16 | [Link](https://robu.in/product/330-ohm-1-4w-1206-surface-mount-chip-resistor-pack-of-100/) |
+| **23** | 360Ω 0805 SMD Resistor (Yageo) | Robu | 1 | ₹15 | $0.16 | [Link](https://robu.in/product/rc0805fr-07360rl-yageo-360-ohms-%c2%b11-0-125w-1-8w-chip-resistor-0805-2012-metric-moisture-resistant-thick-film/) |
+| **24** | 100Ω 1/4W 1206 SMD Resistor | Robu | 1 | ₹15 | $0.16 | [Link](https://robu.in/product/100-ohm-chip-resistor-1-4w-1206-surface-mount-pack-of-100/) |
+| **25** | 10kΩ 0805 SMD Resistor | Amazon | 1 | ₹99 | $1.06 | [Link](https://www.amazon.in/Electronic-Spices-Power-Thick-Resistor/dp/B0BFD96R76/) |
+| **26** | 100Ω 2W Carbon Film Resistor | Robu | 1 | ₹2.45 | $0.03 | [Link](https://robu.in/product/100-ohms-2w-carbon-film-resistor-pack-of-50/) |
+| **27** | 100nF 400V DIP Polyester Film Cap | Robu | 1 | ₹6.00 | $0.06 | [Link](https://robu.in/product/100nf-400v-dip-polyester-film-capacitor-pitch10mm/) |
+| **28** | 100nF 0805 SMD Ceramic Capacitor | Robu | 3 | ₹2.37 | $0.03 | [Link](https://robu.in/product/100nf-0805-surface-mount-multilayer-ceramic-capacitor-pack-of-40/) |
+| **29** | 100µF 35V SMD Tantalum Capacitor | Robu | 1 | ₹57.00 | $0.61 | [Link](https://robu.in/product/100uf-35v-10-d-case-chip-tantalum-capacitorsmd-avx/) |
+| | **FINAL GRAND TOTAL** | | | **₹8,816.82** | **$94.80** | |

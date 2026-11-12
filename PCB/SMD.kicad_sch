@@ -8832,7 +8832,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_THT:C_Rect_L18.0mm_W5.0mm_P15.00mm_FKS3_FKP3"
 			(at 268.9352 41.91 0)
 			(hide yes)
 			(show_name no)
@@ -9476,7 +9476,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
 			(at 266.192 45.72 90)
 			(hide yes)
 			(show_name no)

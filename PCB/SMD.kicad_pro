@@ -76,7 +76,16 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "starved_thermal|40211600|92619200|f7cc2f5f-5a6b-44a1-83f0-8345409bdb2c|b1b70579-ef06-49ae-99c4-373fccc449fb|F.Cu",
+          ""
+        ],
+        [
+          "starved_thermal|61496800|92724600|f7cc2f5f-5a6b-44a1-83f0-8345409bdb2c|d7e26cd0-98e0-4eac-9640-bccd2173ae58|B.Cu",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -581,7 +590,7 @@
     "last_paths": {
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "../../../../GitHub/SmdGun/PCB/GREBERS/",
       "specctra_dsn": "",
       "step": "SMD.step",
       "vrml": ""
